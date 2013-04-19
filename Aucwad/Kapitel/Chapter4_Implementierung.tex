@@ -1,0 +1,143 @@
+\chapter{Implementierung\label{Chapter4}}
+
+Dieses Kapitel beschreibt den Aufbau und die Umsetzung der in dieser Arbeit entwickelten Software. 
+\TODO{more to say? i'm sure...}
+
+\section{Architektur\label{SectionArch}}
+
+Die Software gliedert sich in drei Komponenten, welche auf die in Kapitel \ref{Chapter2} beschriebenen Softwareelemente zugreifen, beziehungsweise diese verwenden. Auf die Komponenten wird in der folgenden Auflistung kurz eingegangen. In den anschließenden Unterabschnitten folgt ein detaillierter Überblick über die Komponenten und deren Zusammenwirken.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{./bilder/AuToGen_Programmaufbau}
+\caption{Der allgemeine Programmaufbau}
+\label{fig:aufbau}
+\end{center}
+\end{figure}
+
+\subsubsection{CTE}
+
+Der CTE-Programmteil analysiert die im CTE erstellten XML-Dateien mit Hilfe eines XML Document Object Model Parsers, in Abbildung \ref{fig:aufbau} als CTEParser dargestellt. 
+Die Java DOM API zum XML-Parsen arbeitet mit einer XML-Datei als einen Objektgraphen. Der Parser durchläuft das XML Dokument und erstellt die korrespondierenden DOM Objekte. Diese DOM Objekte werden in einer Baumstruktur angeordnet. Danach kann dann die DOM Struktur über die bereitgestellten Methoden durchsucht werden. 
+
+In der DOM Struktur werden die Klassifikationen und Klassen des Klassifikationsbaums per Pattern-Matching gefiltert. Die Struktur eines im CTE generierten XML-Baums ist immer gleich, daher bietet sich diese Methode an. 
+
+\subsubsection{Runtime Tests}
+
+Im Package runtimeTests liegen die JUnit Tests welche mit Hilfe des WebDrivers auf die Webapplikation zugreifen. Im ersten Test, welcher die erste Seite des zu testenden Wizards behandelt, wird über die Startseite zur gewünschten Seite navigiert. Dort wird über Assertions jede Eingabemöglichkeit geprüft. Dieser Vorgang wird auf allen zu testenden Seiten wiederholt.
+Diese Tests sind der Übersicht halber in Abbildung \ref{fig:aufbau} als Page\_XTest dargestellt, wobei des X für die Nummerierung der Tests steht.
+
+\subsubsection{Page Objects}
+
+Die Page Objects repräsentieren die Webseiten der Webapplikation. Diese Java Klassen sind nach dem Page Object Pattern erstellt worden. Ein Page Object modelliert die Bereiche einer Webseite, mit denen die Tests interagieren, als Objekte. Dadurch wird die Menge an Testcode reduziert und erleichtert das Anpassen der Tests, falls sich etwas an dem User Interface oder am Seitenaufbau ändert.
+
+Page Objects stellen die Funktionalitäten, welche von einer bestimmten Webseite zur verfügung gestellt werden, dar. Diese Page Objects beinhalten, als einzige Elemente des Programms, die Struktur des HTML Inhalts einer Webseite bzw. dem modellierten Teil einer Webseite. Page Objects bieten folglich nur die Services nach außen an und umschließen die Details sowie Mechanismen der Webseite.
+
+\subsection{CTE Anbindung\label{sec:cteAnbindung}}
+
+Die Anbindung des Classification Tree Editors erfolgt wie bereits erwähnt über die XML-Dateien welche der Editor zum Anlegen der Klassifikationsbäume verwendet. Die Dateien welche getestet werden werden im User Interface per Dateiauswahl bestimmt. Wie in Abschnitt \ref{SectionArch} erläutert wird die XML-Datei analysiert und durchsucht. 
+
+Die gefundenen Kompositionen, Klassifikationen und Klassen sowie die ebenfalls im XML enthaltenen Testcases werden in Java-Objekten gespeichert. Die aus dem Klasifikationsbaum entstandenen Java-Objekte werden, wie sich anbietet, in einer Baum-Struktur abgelegt. Die Testcases werden in einer Liste gespeichert.
+
+
+%% Serialisierung, Deserialisierung? Oder schon in Datenvewerwaltung?
+
+
+\subsection{Datenverwaltung}
+
+Die in Abschnitt \ref{sec:cteAnbindung} beschriebenen Strukturen, in welchen die Objekte abgelegt sind, werden serialisiert und in einer Datei gespeichert. So müssen bereits analysierte CTE-XML-Dateien nicht erneut durchlaufen werden. Diese Dateien werden zur Laufzeit des Programms deserialisiert und von den JUnit-Test Klassen geladen.
+
+Der Daten-Verlauf und die daraus resultierende Änderung der Datentypen wird in Abbildung \ref{fig:datenverlauf} dargestellt.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{./bilder/datenverlauf3}
+\caption{Datenverlauf vom CTE zum System Under Test(SUT)}
+\label{fig:datenverlauf}
+\end{center}
+\end{figure}
+
+\newpage
+\subsection{Testablauf}
+
+Die JUnit-Test Klassen werden parametrisiert ausgeführt. Durch eine Parametrisierung ist es möglich alle Testmethoden einer Testklasse automatisch mehrmals hintereinander mit unterschiedlichen Testdaten anzusteuern. Das bedeutet, dass pro Klassifikationsbaum-Testcase alle JUnit-Tests einer Testklasse, mit den jeweiligen Daten des aktuellen Testcases, ausgeführt werden. Dies wird wiederholt bis alle Testcases abgearbeitet wurden. Die Parameter für die jeweiligen Tests bezieht die Klasse aus den zuvor gespeicherten Dateien, auf welche im vorigen Abschnitt eingegangen wird.
+
+Zunächst wird in einer Parameter-Methode das Testcase-Array geladen. Über dieses wird bei jedem Durchlauf eines Testcases iteriert, bis alles Testcases abgearbeitet sind. Ein veranschaulichter Ablauf der JUnit-Tests wird in Abbildung \ref{fig:Testablauf} gezeigt.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.75]{./bilder/Testablauf}
+\caption{Junit-Testablauf}
+\label{fig:Testablauf}
+\end{figure}
+
+Im Detail betrachtet, gibt es für jede zu testende Webseite eine JUnit-Testklasse. Die erste Webseite, welche getestet werden soll, führt alle in ihr enthaltenen Testmethoden aus. Diesen Methoden werden die Daten des ersten vorliegenden Testfalls übergeben.
+Ist der erste Testfall abgearbeitet, wird überprüft ob noch weitere auf die aktuelle Seite folgende, Webseiten getestet werden sollen. Ein Testfall ist dann abgearbeitet wenn alle JUnit-Testmethoden einer Klasse erfolgreich abgearbeitet wurden, was bedeutet das es keine Fehler oder falsche Eingabedaten vorliegen. 
+
+Wenn nach dem ersten Testcase festgestellt wird das noch weitere verlinkte Seiten getestet werden sollen, wird zunächst auf diese Seite navigiert. Danach ruft eine spezielle Methode(\TODO{ref to chapter2->junit}), welche nach jedem erfolgreich abgeschlossenem Testcase aufgerufen wird, den nächsten JUnit-Test auf. In diesem wird die ganze Prozedur wiederholt.
+
+Durch diese Vorgehensweise wird sichergestellt das jede mögliche Testcase-Kombination über zwei oder mehr Seiten ausgeführt wird. Es entsteht ein Baum-Artiges durchlaufen aller Testfälle, siehe auch \ref{fig:Testdurchlauf}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{./bilder/testdurchlauf}
+\caption{Verkettung der JUnit-Tests für die Webseiten}
+\label{fig:Testdurchlauf}
+\end{figure}
+
+In dieser Abbildung sieht man sehr detailliert wie die Testfälle durchlaufen werden. Vom Startpunkt ausgehend, wird die erste Webseite(S1) angesteuert. Die gestrichelte Linie stellt die Durchführung der Testmethoden für diese Seite dar. Darauf folgt eine Drei-Wege-Entscheidung. In der Legende der Abbildung \ref{fig:Testdurchlauf} werden die Bedeutungen der verschiedenen Wege erläutert. In der Abbildung sind für die Webseiten beispielhaft eine Menge von Testfällen angegeben. 
+
+Im folgenden wird anhand der vorgegeben Daten der Abbildung ein Testdurchlauf exemplarisch dargestellt. Dafür wird eine Kurznotation verwendet. Beispielgebend steht $SXTX$ für Seite Nr. X mit Testcase Nr. X.
+
+\begin{equation}
+S1T1 \rightarrow S2T1 \rightarrow S3T1 \rightarrow S2T2 \rightarrow S3T1 \rightarrow Ende\label{eq:test1}
+\end{equation}
+
+Wählt man Werte mit mehr Testdurchläufen wird die Baumstruktur welche entsteht noch deutlicher.
+
+Beispiel: S1 mit T=2, S2 mit T=2, S3 mit T=2
+
+Daraus ergibt sich folgender Testablauf:
+
+\begin{align}
+\nonumber
+S1T1 \rightarrow S2T1 \rightarrow S3T1 \rightarrow S3T2 \rightarrow S2T2 \rightarrow S3T1 \rightarrow S3T2 \rightarrow \\ S1T2 \rightarrow S2T1 \rightarrow S3T1 \rightarrow S3T2 \rightarrow S2T2 \rightarrow S3T1 \rightarrow S3T2 \rightarrow Ende
+\label{eq:test2}
+\end{align}
+
+Anhand der Testfolgen \ref{eq:test1} und \ref{eq:test2} lassen sich nun die Bäume die diese ergeben darstellen, siehe Abbildungen \ref{fig:testbaum1} und \ref{fig:testbaum2}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.99]{./bilder/testbaum1}
+\caption{Der Testdurchlauf \ref{eq:test1} visualisiert in einer Baumstruktur.}
+\label{fig:testbaum1}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.99]{./bilder/testbaum2}
+\caption{Testdurchlauf \ref{eq:test2} in eine Baumstruktur überführt.}
+\label{fig:testbaum2}
+\end{figure}
+
+Diese Bäume stellen gut den Zusammenhang zwischen den Testcases dar, allerdings fehlt ihnen die Rückverbindung wie sie in Abb. \ref{fig:Testdurchlauf} dargestellt sind. Das ist in diesem Fall aber zu vernachlässigen, da in Abbildung \ref{fig:Testdurchlauf} nicht deutlich wird woher die Verzweigungen an den Knoten ergeben. Da das Programm aber alle verfügbaren Testcases in beliebiger Reihenfolge ausführen kann, wird dies in der Baumdarstellung verdeutlicht.
+
+\subsection{Ergebnisdokumentation}
+
+Die Valvestar-Webseite bietet eine Automatisch generierte Dokumentation eines jeden Projektes an. Ein Projekt stellt im Falle des hier vorgestellten Programms eine Testreihe dar. In einem Projekt sind die einzelnen Testfälle angeordnet. Die Dokumentation ist unmittelbar nach Ausführung einer Testreihe verfügbar. 
+
+Es gibt zwei Arten von Dokumentationen welche aufgerufen werden können. die erste ist für das gesamte Projekt, diese kann als Excel-Tabelle gespeichert werden. Die zweite ist für die jeweiligen Testfälle, respektive die erstellten Ventile. Die Dokumentation der Ventile ist in einer Webansicht sowie als PDF verfügbar.
+
+Jede erstellte Testfall-Dokumentation enthält alle relevanten Informationen über das erstellte Ventil sowie Details über die Korrektheit der eingegebenen Werte und gewählten Materialien. In den erstellten Dokumentationen können des Weiteren mit Notizen versehen, die Ventile korrigiert oder gelöscht werden.
+
+Des Weiteren wird ein Log erstellt, welches die Daten über den Verlauf der Testcases enthält. Speziell über Erfolg oder Misserfolg der einzelnen Testfälle.
+\TODO{ Doku auf page, Log in datei}
+
+\section{Design}
+
+Das Grafische Design wurde parallel zum architektonischen Design erstellt. 
+
+\subsection{User Interface}
+
+\subsection{Zusammenspiel}

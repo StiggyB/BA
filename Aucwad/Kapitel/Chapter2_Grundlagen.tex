@@ -1,0 +1,176 @@
+\chapter{Grundlagen\label{Chapter2}}
+
+Dieses Kapitel beschäftigt sich mit den Grundlagen für die Entwicklung des Programms, der Erstellung von grundlegenden Elementen für die Arbeit, sowie den in der Arbeit eingesetzten Tools. Es behandelt zunächst die theoretischen Grundlagen der Klassifikationsbaum-Methode und geht im Folgenden auf technische Details, sowie den Aufbau und die Verwendung der implementierten und eingesetzten Werkzeuge ein.
+
+\section{Klassifikationsbaum-Methode\label{c2_klass}}
+
+Die Klassifikationsbaum-Methode ist eine weit verbreitete Methode zur Ermittlung von funktionalen Blackbox-Tests, eingeführt von Grochtmann und Grimm siehe \cite{gro_grimm_1993}. Die Blackbox-Testmethode leitet Testfälle aus der Software-Spezifikation ab ohne auf die Implementierung Rücksicht zu nehmen. 
+
+Um große und komplexe Software-Systeme automatisch zu testen, ist eine große Menge an Testdaten nötig sowie ein gut definierter Testprozess. Die Klassifikationsbaum-Methode geht von einer funktionalen Spezifikation des Testobjekts aus. Die Grundidee hinter dieser Methode ist es die möglichen Eingabewerte eines Testobjekts aufzuteilen. Aus diesen Eingabewerten erhält man eine Menge von Testfallspezifikationen, welche nach Möglichkeit, keine redundanten Fehlerfälle enthalten die jedoch fehler-sensitiv sind und den gesamten Eingabewertebereich abdecken. Durch diese methodische Herangehensweise wird sichergestellt das die resultierenden Äquivalenzklassen, bzw. Testfallspezifikationen, alle für die Software relevanten Testfälle enthält. Um das zu erreichen wird wie folgt vorgegangen.
+
+Zunächst werden alle Test relevanten Aspekte des Test Systems in Klassifikationen festgelegt. Diese müssen disjunkt und vollständig sein, so dass sie als Äquivalenzklassen im mathematischen Sinne gelten. Das bedeutet das keine Äquivalenzklasse mit einer anderen in Relation steht, bzw. die Klassifikationen sich nicht überschneiden sowie das die Menge der Testaspekte genügend ist um das Testobjekt zu beschreiben.
+ 
+Beispielhaft könnte ein Testobjekt "{}Objekterkennung"{}, welches das Wurzelelement des Baumes darstellt, mit den beiden Klassifikationen "Farbe" und "Form" beschrieben werden (siehe Abbildung \ref{obj1}).
+
+%%BILD?
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{./bilder/Obj_1}
+\caption{Test Objekt mit zwei Klassifikationen}
+\label{obj1}
+\end{center}
+\end{figure}
+
+Als nächstes werden gültige Eingabewerte für jede Klassifikation gewählt. Diese konkreten Eingabewerte oder auch Charakteristika werden als Klassen bezeichnet (Abb. \ref{obj2}). Klassen können nach Vervollständigung des Baumes mit Testfällen in der Testmatrix verbunden werden.
+\par
+
+%%BILD?
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{./bilder/Obj_2}
+\caption{Test Objekt mit zwei Klassifikationen und den zugehörigen Klassen}
+\label{obj2}
+\end{center}
+\end{figure}
+
+Nun werden, wenn nötig, Klassen redefiniert. Das ist dann der Fall wenn der mögliche Eingabewert noch zu abstrakt ist. Dieser kann dann in weitere Klassifikationen aufgeteilt werden. In dem Beispiel in Abbildung \ref{obj3} hat die Form Polygon zwei Testaspekte welche sich spezifisch auf Polygone beziehen. Die Regularität sowie die Anzahl der Kanten des Polygons.
+\par
+
+%%BILD?
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{./bilder/Obj_3}
+\caption{Die Klasse Polygon wurde in Klassifikationen aufgeteilt}
+\label{obj3}
+\end{center}
+\end{figure}
+
+Zum Schluss werden die Testfälle mit Hilfe der Eingabewerte(Klassen) der Klassifikationen definiert. Dies wird in einer Testfall-Matrix realisiert. Der Baum gibt vor welche Klassen dafür ausgewählt werden können. So wie dieser Klassifikationsbaum modelliert ist, können zum Beispiel die Farben Rot und Grün nicht gleichzeitig gewählt werden. Der für das Beispiel vollständige Klassifikationsbaum ist in Abbildung \ref{objfull} dargestellt. Unter dem Baumdiagramm befindet sich die Testfall Matrix.
+
+%%Bild?
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{./bilder/Obj_full2}
+\caption{Vollständiger Klassifikationsbaum}
+\label{objfull}
+\end{center}
+\end{figure}
+
+Ein weiteres Element des Klassifikationsbaums ist die Komposition, diese umfasst mehrere Klassifikationen als Kind-Elemente. Eine Komposition kann allerdings auch weitere Kompositionen als Kind-Elemente Besitzen. Kompositionen leiten sich vom Wurzelelement, welches das Testobjekt darstellt, ab sowie von Klassifikationen oder Klassen. Abbildung \ref{kbelemente} zeigt in einem grafischen Beispiel den Zusammenhang aller Elemente.
+\par
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{./bilder/Klassifikationsbaum_Beispiel}
+\caption{Ein Klassifikationsbaum mit seinen spezifischen Elementen}
+\label{kbelemente}
+\end{center}
+\end{figure}
+
+\subsection{Classification Tree Editor XL Professional}
+
+Um die für das zu entwickelnde Programm benötigten Klassifikationsbäume erstellen zu können, wurde der Classification Tree Editor XL in der Professional Version von Berner \& Mattner verwendet. Entwickelt wurde der Editor von DaimlerChrysler Research Berlin. Der CTE unterstützt die Erstellung und den Entwurf von Klassifikationsbäumen, als auch die Spezifikation der Testfälle in einer Matrixdarstellung.
+
+Der CTE XL ist ein, in Java geschriebener, Graphischer Editor auf Eclipse-Basis, welcher es unter anderem ermöglicht Testfälle und Testsequenzen zu generieren, Logische und Numerische Abhängigkeitsregeln festzulegen oder auch Export-Möglichkeiten zu verschiedenen weiterverarbeitenden Programmen wie Matlab bietet. Auf die wichtigsten dieser Funktionen wird später in diesem Unterabschnitt eingegangen. 
+
+Die im CTE erstellten Klassifikationsbäume werden im XML-Format gespeichert. Dieses Format wird auch als Ansatzpunkt für das zu entwickelnde Programm verwendet, so dass keine Konvertierung mehr notwendig ist.
+
+\subsubsection{Testfallgenerierung}
+
+Der CTE XL ermöglicht es, in der Professional Version, Testfälle aus bereits erstellten Klassifikationsbäumen zu generieren. Durch das verbinden einzelner Klassifikationen können über logische und numerische Operatoren Verknüpfungen zwischen diesen erstellt werden. Je nach Größe und Umfang des Baumes kann die Generierung einige Zeit in Anspruch nehmen. Nimmt man das Beispiel aus dem Abschnitt \ref{c2_klass} entstehen dadurch die zehn ($2*5$) möglichen Testfälle mit einem Tastendruck (Abb. \ref{fig:generate}).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{./bilder/Obj_generate}
+\caption{Testcase-generierung mit dem CTE XL}
+\label{fig:generate}
+\end{figure}
+
+In Abbildung \ref{fig:generate} sieht man die möglichen Operatoren in der Mitte des Popup-Menüs. 
+
+\subsubsection{CTE Regeln}
+
+Die logischen und numerischen Abhängigkeitsregeln des Classification Tree Editors können auf Klassifikationsbäume angewendet werden um beispielsweise Testfälle auszuschließen welche ohnehin keine möglichen Kombinationen im System Under Test darstellen.
+
+Betrachtet man beispielsweise Abbildung \ref{objfull} und geht davon aus das es im SUT keine roten Polygone geben kann. So kann man dies über eine logische Regel definieren. Eine solche Regel wird im CTE XL, wie in Abbildung \ref{fig:logrule} zu sehen, dargestellt.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{./bilder/logrule}
+\caption{Erstellen einer logischen Regel im CTE XL}
+\label{fig:logrule}
+\end{figure}
+
+Durch das einsetzten dieser Regel wird bei aktiviertem Regel-Checker nun die Regel direkt beim erstellen der Testcases angewandt und alle gegen die Regel verstoßenden Testcases ausgeschlossen. Daraus folgt, dass es nur noch sechs Testfälle für diesen Baum gibt.
+
+Numerische Regeln werden ähnlich angewandt und kommen vornehmlich bei Datensätzen mit Ziffern zum Einsatz. Diese unterscheiden sich im Aufbau nur von den hier zum Einsatz kommenden mathematischen Operatoren.
+
+\section{Selenium WebDriver}
+
+Die Selenium WebDriver API, auch Selenium 2 genannt, ist zur Automation von Browsern entwickelt worden und wurde 2004 unter der Apache License 2.0 veröffentlicht. Derzeit arbeitet das World Wide Web Consortium (W3C) in der Arbeitsgruppe \textit{Browser Testing and Tools Working Group} an einem WebDriver-Entwurf, welcher sich stark an dem Selenium WebDriver orientiert und diesen Standardisieren soll\cite{stewart_webdriver_2013}.
+%\begin{quote}
+%This specification defines the WebDriver API, a platform and language-neutral interface and associated wire protocol that allows programs or scripts to introspect into, and control the behaviour of, a web browser. The WebDriver API is primarily intended to allow developers to write tests that automate a browser from a separate controlling process, but may also be implemented in such a way as to allow in-browser scripts to control a, possibly separate, browser.
+%\end{quote}
+
+Der primäre Fokus von Selenium liegt auf dem automatisierten Testen von Web-Applikationen. Allerdings lassen sich die Funktionen für viele weitere Gebiete einsetzten, wie zum Beispiel der Automatisierung von web-basierten Administrations-Anwendungen.
+
+Eine einfache Methode für weniger umfangreiche und ausführliche Tests bietet Selenium mit einer im Browser integrierten IDE. Die IDE ermöglicht das Aufzeichnen von Testfällen im Browser. Dieses Werkzeug eignet sich daher vor allem zur Reproduktion von Fehlerfällen oder der Erstellung Skripten zur Unterstützung des automatisierten Testens.
+
+Selenium bietet eine reibungslose Anbindung an nahezu alle gängigen Betriebssysteme, Browser, Programmiersprachen sowie Testing-Frameworks. Tabelle \ref{tab:selenium} zeigt eine Übersicht der verwendbaren Testing-Frameworks.
+
+\begin{table}
+\centering	
+\begin{tabular}{|p{2cm}||p{4cm}|p{4cm}|}	
+\hline
+Framework & Selenium IDE & Selenium 2 \\
+\hline
+\hline
+Bromine & Comes with template to add to IDE & 	Manipulate browser,\newline check assertions via custom driver \\
+\hline
+\textbf{JUnit} & \textbf{Out-of-the-box code\newline generation} & \textbf{Manipulate browser,}\newline \textbf{check assertions via Java driver} \\
+\hline
+NUnit &	Out-of-the-box code\newline generation &	Manipulate browser,\newline check assertions via .NET driver \\
+\hline
+RSpec (Ruby) &	Custom code\newline generation template & 	Manipulate browser,\newline check assertions via Ruby driver 	\\
+\hline
+Test::Unit (Ruby) &	Out-of-the-box code\newline generation & Manipulate browser,\newline check assertions via Ruby driver 	\\
+\hline
+TestNG (Java) &	Custom code generation template &	Manipulate browser,\newline check assertions via Java driver 	\\
+\hline
+unittest (Python) &	Out-of-the-box code generation\newline & Manipulate browser,\newline check assertions via Python driver \\
+\hline
+\end{tabular}
+\caption{Von Selenium unterstützte Testing Frameworks}
+\label{tab:selenium}
+\end{table}
+
+Im zu erstellenden Programm wird Selenium, wie in der Tabelle \ref{tab:selenium} hervorgehoben, in verbindung mit JUnit 4.11 verwendet. Im nächsten Abschnitt wird auf diesen Framework näher eingegangen.
+
+\section{JUnit}
+
+JUnit\footnote{\url{www.junit.org}} ist ein Testing Framework welches dazu dient reproduzierbare, automatisierte Tests in Java zu schreiben. Es basiert auf der xUnit-Architektur, welche es erlaubt verschiedene Elemente(Units) einer Software isoliert von anderen Programmteilen zu testen. Die Auflösung der getesteten Elemente kann von Funktionen und Methoden sowie Klassen bis zu ganzen Komponenten reichen. Die Software ist frei unter der Common Public License(CPL) veröffentlicht und im Wesentlichen von Kent Beck und Erich Gamma entwickelt. JUnit ist seit 1998 der Standard für Entwicklertests und in nahezu allen Java-Entwicklungsumgebungen integriert, siehe auch \cite{westphal_testgetriebene_2005}.
+
+Der Vorteil einer solchen Architektur ist es, dass sie eine Automatisierte Lösung bietet. Es ist nicht nötig zu vermerken welches Ergebnis ein Test liefern sollte. Des Weiteren werden durch ein solches Framework redundante Tests vermieden. Eine Beurteilung und Analyse der Testergebnisse durch den Menschen ist nicht mehr nötig, da die Assert-Methoden aus JUnit diese Beurteilung übernehmen.
+
+Um in JUnit einen Test auszuführen muss man seit Version 4 im wesentlichen nur zwei Schritte beachten.
+
+\begin{enumerate}
+\item
+Die Testmethode muss mit entspechend als Test annotiert werden
+\item
+In dieser Methode muss eine Assert-Methode aufgerufen werden, welche über die Assert-Klasse statisch eingebunden werden.
+\end{enumerate}
+
+Dieser Test kann dann direkt über die Entwicklungsumgebung oder einen Konsolenaufruf gestartet werden.
+
+\TODO{@Before/@After Konzept SET UP TEAR DOWN}
+\TODO{@Rule Konzept}
+%DEPRECATED SINCE JUnit 4
+%In Abbildung \ref{fig:junitaufbau} wird der Aufbau des JUnit-Frameworks verdeutlicht.
+%
+%\begin{figure}[htbp]
+%\centering
+%\includegraphics{./bilder/ClassDiagram_JUNIT}
+%\caption{JUnit Frameworkaufbau}
+%\label{fig:junitaufbau}
+%\end{figure}

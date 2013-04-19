@@ -1,0 +1,49 @@
+\chapter{Fallstudie\label{Chapter5}}
+
+In diesem Kapitel wird die Anwendung des Programms auf das vorliegende Test Objekt erläutert. 
+
+\section{Test System}
+
+In allen Tests wie auch bei der Erstellung des Programms wurde folgendes System verwendet:
+
+HP EliteBook 8740w
+
+\begin{table}[htbp]
+\begin{tabular}{|c|c|}
+\hline 
+CPU & Intel Core i7 M640 @ 2.80 Ghz \\ 
+\hline 
+RAM & 4,00 GB DDR3 \\ 
+\hline 
+Festplatte & Seagate Momentus 7200.4 250GB, SATA II (ST9250410AS) \\ 
+\hline 
+Betriebssystem & Windows 8, 64-Bit \\ 
+\hline 
+Java Version & 1.7.0\_10 \\ 
+\hline 
+Firefox Version & 17.0 \\ 
+\hline 
+\end{tabular}
+\label{tab:data}
+\end{table}
+
+Für das Programm werden nur Java-Versionen ab 1.7.0\_10 aufwärts unterstützt. Als Browser wird nur der Mozilla Firefox in Version 17.0 oder geringer unterstützt, da zu Beginn der Programmierung die Selenium Bibliothek in der Version 2.25 eingebunden wurde, welche nur diese Versionen von Mozilla Firefox unterstützt.
+
+\TODO{BSP aus benchmar.tex?}
+
+\section{Test Objekt}
+
+\subsection{Test Wizard}
+
+\section{Testzeiten}
+
+\TODO{Vorgehensweise, Beispiel}
+
+Auf dem Testsystem wurden mehrere Tests ausgeführt um eine Testzeitanalyse zu erstellen. Für 10 Tests, welche sich auf eine Test-Seite beziehen, benötigt das Programm im Schnitt 10.3 Sekunden. Hochgerechnet auf 13.000 Tests(\ref{sec:Szenario}) entspricht das in etwa 3.75 Stunden. 
+Ein Test über zwei Seiten mit zwei Testscases für die erste Seite und fünf für die zweite Seite dauert durchschnittlich 208 Sekunden. Das bedeutet das 10 Tests mit einem Seitenübergang im Wizard, im Vergleich zu 10 Tests auf einer Seite, ca. 20 mal soviel Zeit benötigen.
+
+Die Testzeiten erhöhen sich also in hohem Maße wenn mehrere Seiten getestet werden. Hauptsächlich wird dies durch die Latenz zum Server verursacht. Bei Tests über zwei Seiten wird zusätzlich jedes mal der Wizard abgeschlossen, ein neues Sizing erstellt und wieder auf die zu testende Seite navigiert. Dieser Vorgang veranschlagt zwischen 5 und 20 Sekunden. Diese Spanne liegt so weit auseinander, da die Zeit die benötigt wird um wieder zur Testseite zu kommen sich mit jedem Testcase um ein bis vier Sekunden erhöht.
+
+\subsection{Evaluation der Testzeiten}
+
+\section{Effektivität der Methode}

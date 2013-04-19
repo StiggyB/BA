@@ -1,0 +1,61 @@
+\chapter{Einleitung\label{Chapter1}}
+
+
+\section{Motivation}
+
+\TODO{cite REF REF}
+Solides Testen im Web wird zunehmend zu einem der wichtigsten Bereiche in der Software Entwicklung sowie im Software Engineering. Um die Softwarequalität von Websites sicherzustellen, ist es essentiell anspruchsvolle Programme für die Testautomation zu entwickeln.
+
+Das designen von Testfällen ist eine entscheidende Testkomponente welche in hohem Maße die Qualität eines Tests bestimmt. Die Auswahl der Testfälle legt den Grundstein für die Art sowie die Fokussierung des Tests.
+
+Wenn Testfälle auf Basis von Spezifikationen festgelegt werden, sind die daraus resultierenden Tests funktional. Funktionale Tests sind höchst wichtig für die Verifikation von Software und werden von einer breiten Masse in der Industrie eingesetzt. Allerdings gibt es nur wenige Methoden und Applikationen welche die Systematische Erstellung von Testfällen für funktionale Tests unterstützen. Deshalb wird häufig auf nur teilweise  anwendbare Tools zurückgegriffen, wie MS Excel oder Entscheidungstabellen.
+
+Die Klassifikationsbaum-Methode ist eine effiziente Testmethode für funktionales testen, welche die Möglichkeit bietet, den kompletten Eingabebereich  eines Testobjekts in unabhängige Äquivalenzklassen aufzuteilen.
+
+\section{Zielsetzung}
+Ziel dieser Arbeit ist es ein Java-Applikation zu entwickeln welche mit Hilfe von Klassifikationsbäumen automatisiertes Web Testing durchführt. Web Testing beschreibt einen Teil des Softwaretestens, der sich auf Applikationen aus dem Web bezieht. 
+
+Die Klassifikationsbäume werden mit dem Programm Classification Tree Editor XL Professional von Berner \& Mattner\footnote{www.berner-mattner.com} erstellt.  Abbildung \ref{CTEXL} zeigt den CTE XL. Mit diesem Editor ist es weiterhin möglich Testfälle zu generieren. Die im CTE erstellten Bäume und generierten Testfälle sollen in das Programm geladen werden und dort in verwendbare Java-Objekte gewandelt werden.
+
+Mit Hilfe der Selenium WebDriver API für Java wird die Ansteuerung des Browsers automatisiert. Die API wirkt unterstützend bei der Kommunikation mit Webseiten, so dass auf diesen programmiertechnisch navigiert und interagiert werden kann.
+
+Zur Ausführung und Auswertung der Testfälle werden JUnit Tests für die spezifischen vorgegebenen Websites entwickelt um automatisch, mit den Daten aus den zuvor erstellten Klassifikationsbäumen und der WebDriver API, die Tests auszuführen.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{./bilder/CTE_XL_BSP}
+\caption{Classification Tree Editor XL}
+\label{CTEXL}
+\end{center}
+\end{figure}
+
+Im Endeffekt soll die Applikation dem Tester die Erstellung von Testfällen erleichtern sowie die Ausführung dieser automatisieren. Durch diese Vorteile reduziert sich der Testaufwand deutlich und ermöglicht eine effizientere Bearbeitung von Testobjekten.
+
+\TODO{more more more, and ref}
+
+\section{Gliederung}
+
+\textbf{Kapitel \ref{Chapter1}}
+
+Die Einleitung beschreibt die Motivation und Zielsetzung der Arbeit.
+
+\textbf{Kapitel \ref{Chapter2}} 
+
+Im zweiten Kapitel wird auf die Grundlagen für die Entwicklung des Programms eingegangen.
+
+\textbf{Kapitel \ref{Chapter3}} 
+
+Das dritte Kapitel analysiert die Anforderungen und behandelt das vorliegende Szenario.
+
+\textbf{Kapitel \ref{Chapter4}} 
+Dieses Kapitel behandelt die Implementierung und geht auf die Architektur sowie die Anwendung der Grundlagen ein.
+
+\textbf{Kapitel \ref{Chapter5}} 
+
+Kapitel fünf beinhaltet die Fallstudie, es behandelt hauptsächlich die Anwendung des Programms auf das Test Objekt.
+
+\textbf{Kapitel \ref{Chapter6}} 
+
+Im Kapitel sechs wird ein Fazit gezogen und ein Ausblick gegeben.
+
+\TODO{you know what}

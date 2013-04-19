@@ -1,0 +1,56 @@
+\chapter{Anforderungsanalyse\label{Chapter3}}
+
+Das folgende Kapitel geht auf die Ziele der zu programmierenden Software, sowie das gegebene Szenario ein. In dieser Analyse werden, über die Definition der Ziele, die Anforderungen hergeleitet und das zugrundeliegende Szenario beleuchtet.
+
+\section{Ziele der Software}
+
+Das primäre Ziel der Software ist es die Zeit und den Aufwand zur Erstellung und Ausführung von Testfällen zu reduzieren sowie den Anzahl der Testdatensätze zu reduzieren und trotz dessen voll qualifizierende Testfälle zu generieren. 
+
+Kann der Aufwand für die Ausführung von Testfällen für eine Web-Applikation verringert werden, so reduziert sich die Arbeitsbelastung des Testers durch weniger Zeitintensive Tests. Wenn gleichzeitig die Erstellung von Testfällen weniger komplex wird, so vermindert dies ebenfalls das Pensum welches für die Tests benötigt wird. 
+
+Dies wird durch die gezielte Klassifizierung von Daten mit Hilfe der Klassifikationsbaum-Methode(siehe auch Abschnitt \ref{c2_klass}) erreicht. Können Daten in Äquivalenzklassen aufgeteilt werden, so wird die Zahl der möglichen Eingabedaten effektiv minimiert. Jedes Element oder Datum wird dann genau einer Äquivalenzklasse zugeordnet. Alle sich in der Äquivalenzklasse befindlichen Elemente können nun als Repräsentant dieser Klasse angesehen werden. Durch diesen klassifizierenden Aufbau der Testfalldaten ist es möglich einige wenige, aber vollkommen qualifizierende, Vertreter einer Klasse zu wählen und nur mit diesen Daten Testfälle zu erstellen. Dieses Verfahren vermindert die Zahl der möglichen Testfälle in hohem Maße.
+
+Zusammenfassend sollen durch die Klassifizierung der Daten, so wie einer minimierten Zahl von Inputs und der automatischen Ausführung der daraus resultierenden Testcases die Ziele erreicht werden.
+
+\section{Szenario und Anforderungen}
+
+Dieser Abschnitt behandelt im Detail das vorliegende Szenario, sowie die Anforderungen an die zu entwickelnde Software. \TODO{say more about szenario and anforderungen}
+
+\subsection{Szenario - VALVESTAR\label{sec:Szenario}}
+
+Das für diese Arbeit verwendete Szenario bezieht sich auf die Website \url{www.valvestar.com}. Die dort verfügbare Webapplikation ermöglicht dem Benutzer die individuelle Zusammenstellung von diversen Sicherheitsventilen der Firma Leser\footnote{\url{www.leser.com}}. 
+
+In dieser Webapplikation soll das Auslegungsprogramm, also der Entwurf und die Gestaltung eines Ventils, automatisiert getestet werden. Die Webapplikation ist über einen Wizard realisiert, welcher den Benutzer bei der Erstellung  unterstützt. Über mehrere Seiten wird man bei der Erstellung begleitet bis die Bearbeitung abgeschlossen werden kann. Ein manueller Test des gesamten Verlaufs der Website ist nur sehr mühsam zu bewerkstelligen. Schon zu Beginn des Wizards(Abb. \ref{fig:sizing}) steht eine beträchtliche Menge an Eingabemöglichkeiten und daraus resultierende Testfälle zur Auswahl.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=\textwidth]{./bilder/sizing_wizard}
+\caption{Auszug der erste Seite des Auslegungs Wizards zur Erstellung eines Ventils}
+\label{fig:sizing}
+\end{center}
+\end{figure}
+
+Die erste Seite dient hier als Beispiel wie mit allen Seiten verfahren wurde. Auf der Seite \textit{Sizing Type and Medium Selection} wurde mit Hilfe des CTE XL als Klassifikationsbaum modelliert und ohne Angabe von Abhängigkeitsregeln wurden alle möglichen Testcases generiert. Das Ergebnis liegt bei über 42.000 Testcases welche abzuarbeiten wären. Durch den gezielten Einsatz dieser Regeln, welche bestimmte Abhängigkeiten zwischen einzelnen Inputs berücksichtigen, konnten die Testcases um ca. 33.000 auf unter 13.000 verringert werden. Im Voraus hat die Klassifikationsbaummethode die Testfälle stark reduziert, durch die Verwendung von Abhängigkeitsregeln konnte der Testaufwand abermals um knapp 70\% verringert werden.  
+
+\subsection{Anforderungen}
+
+\TODO{inital section to introduce anforderungen}
+Zu den Anforderungen gehören:
+
+\begin{itemize}
+
+\item
+Eine prägnante Reduzierung der Eingabedaten, realisiert durch Klassifikationsbäume und Abhängigkeitsregeln.
+\item
+Eine wesentlich Einsparung der Testzeit und des Testaufwandes, im Vergleich zum manuellen Testvorgang.
+\item
+Die automatische Ansteuerung des Browsers sowie des System Under Test(SUT), ohne Verwendung Benutzereingaben in beiden genannten Elementen.
+\item
+Es muss eine intuitive Grafische Benutzeroberfläche geschaffen werden, welche dem Anwender eine leichte Bedienung der Software ermöglicht.
+
+\end{itemize}
+
+\section{Plattformen}
+
+\TODO{
+Erklärung der Verwendung der Plattformen welche in Kapitel \ref{Chapter2} beschrieben wurden??}

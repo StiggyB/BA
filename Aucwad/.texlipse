@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Fri Apr 19 12:32:19 CEST 2013
+markTmpDer=true
+builderNum=2
+outputDir=
+makeIndSty=hawstyle.sty
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=mainBA.tex
+outputFile=mainBA.pdf
+langSpell=de
+markDer=true
+srcDir=

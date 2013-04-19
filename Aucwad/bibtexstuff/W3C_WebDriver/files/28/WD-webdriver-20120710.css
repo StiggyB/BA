@@ -1,0 +1,131 @@
+
+/* ::::: null ::::: */
+
+em.rfc2119 { text-transform: lowercase; font-variant: small-caps; font-style: normal; color: rgb(153, 0, 0); }
+h1 acronym, h2 acronym, h3 acronym, h4 acronym, h5 acronym, h6 acronym, a acronym, h1 abbr, h2 abbr, h3 abbr, h4 abbr, h5 abbr, h6 abbr, a abbr { border: medium none; }
+dfn { font-weight: bold; }
+a.internalDFN { color: inherit; border-bottom: 1px solid rgb(153, 153, 204); text-decoration: none; }
+a.externalDFN { color: inherit; border-bottom: 1px dotted rgb(204, 204, 204); text-decoration: none; }
+a.bibref { text-decoration: none; }
+cite .bibref { font-style: normal; }
+code { color: rgb(255, 69, 0); }
+ol.algorithm { counter-reset: numsection; list-style-type: none; }
+ol.algorithm li { margin: 0.5em 0px; }
+ol.algorithm li:before { font-weight: bold; counter-increment: numsection; content: counters(numsection, ".", decimal) ") "; }
+.toc a, .tof a { text-decoration: none; }
+a .secno, a .figno { color: rgb(0, 0, 0); }
+ul.tof, ol.tof { list-style: none outside none; }
+.caption { margin-top: 0.5em; font-style: italic; }
+table.simple { border-spacing: 0px; border-collapse: collapse; border-bottom: 3px solid rgb(0, 90, 156); }
+.simple th { background: none repeat scroll 0% 0% rgb(0, 90, 156); color: rgb(255, 255, 255); padding: 3px 5px; text-align: left; }
+.simple th[scope="row"] { background: inherit; color: inherit; border-top: 1px solid rgb(221, 221, 221); }
+.simple td { padding: 3px 10px; border-top: 1px solid rgb(221, 221, 221); }
+.simple tr:nth-child(2n) { background: none repeat scroll 0% 0% rgb(240, 246, 255); }
+.section dd > p:first-child { margin-top: 0px; }
+.section dd > p:last-child { margin-bottom: 0px; }
+.section dd { margin-bottom: 1em; }
+.section dl.attrs dd, .section dl.eldef dd { margin-bottom: 0px; }
+
+/* ::::: null ::::: */
+
+div.issue-title, div.note-title { padding-right: 1em; min-width: 7.5em; color: rgb(185, 171, 45); }
+div.issue-title { color: rgb(224, 82, 82); }
+div.note-title { color: rgb(82, 224, 82); }
+div.issue-title span, div.note-title span { text-transform: uppercase; }
+div.note, div.issue { margin-top: 1em; margin-bottom: 1em; }
+.note > p:first-child, .issue > p:first-child { margin-top: 0px; }
+.issue, .note { padding: 0.5em; border-left-width: 0.5em; border-left-style: solid; }
+div.issue, div.note { padding: 0.5em; margin: 1em 0px; position: relative; clear: both; }
+span.note, span.issue { padding: 0.1em 0.5em 0.15em; }
+.issue { border-color: rgb(224, 82, 82); background: none repeat scroll 0% 0% rgb(251, 233, 233); }
+.note { border-color: rgb(82, 224, 82); background: none repeat scroll 0% 0% rgb(233, 251, 233); }
+
+/* ::::: null ::::: */
+
+pre.idl { border-top: 1px solid rgb(144, 184, 222); border-bottom: 1px solid rgb(144, 184, 222); padding: 1em; line-height: 120%; }
+pre.idl:before { content: "WebIDL"; display: block; width: 150px; background: none repeat scroll 0% 0% rgb(144, 184, 222); color: rgb(255, 255, 255); font-family: initial; padding: 3px; font-weight: bold; margin: -1em 0px 1em -1em; }
+.idlType { color: rgb(255, 69, 0); font-weight: bold; text-decoration: none; }
+.idlInterfaceID, .idlDictionaryID, .idlCallbackID, .idlEnumID { font-weight: bold; color: rgb(0, 90, 156); }
+.idlSuperclass { font-style: italic; color: rgb(0, 90, 156); }
+.idlAttrType, .idlFieldType, .idlMemberType { color: rgb(0, 90, 156); }
+.idlAttrName, .idlFieldName, .idlMemberName { color: rgb(255, 69, 0); }
+.idlAttrName a, .idlFieldName a, .idlMemberName a { color: rgb(255, 69, 0); border-bottom: 1px dotted rgb(255, 69, 0); text-decoration: none; }
+.idlMethType, .idlCallbackType { color: rgb(0, 90, 156); }
+.idlMethName { color: rgb(255, 69, 0); }
+.idlMethName a { color: rgb(255, 69, 0); border-bottom: 1px dotted rgb(255, 69, 0); text-decoration: none; }
+.idlParamType { color: rgb(0, 90, 156); }
+.idlParamName { font-style: italic; }
+.extAttr { color: rgb(102, 102, 102); }
+.idlConstType { color: rgb(0, 90, 156); }
+.idlConstName { color: rgb(255, 69, 0); }
+.idlConstName a { color: rgb(255, 69, 0); border-bottom: 1px dotted rgb(255, 69, 0); text-decoration: none; }
+.idlExceptionID { font-weight: bold; color: rgb(204, 0, 0); }
+.idlTypedefID, .idlTypedefType { color: rgb(0, 90, 156); }
+.idlRaises, .idlRaises a.idlType, .idlRaises a.idlType code, .excName a, .excName a code { color: rgb(204, 0, 0); font-weight: normal; }
+.excName a { font-family: monospace; }
+.idlRaises a.idlType, .excName a.idlType { border-bottom: 1px dotted rgb(204, 0, 0); }
+.excGetSetTrue, .excGetSetFalse, .prmNullTrue, .prmNullFalse, .prmOptTrue, .prmOptFalse { width: 45px; text-align: center; }
+.excGetSetTrue, .prmNullTrue, .prmOptTrue { color: rgb(0, 204, 0); }
+.excGetSetFalse, .prmNullFalse, .prmOptFalse { color: rgb(204, 0, 0); }
+.idlImplements a { font-weight: bold; }
+dl.attributes, dl.methods, dl.constants, dl.fields, dl.dictionary-members { margin-left: 2em; }
+.attributes dt, .methods dt, .constants dt, .fields dt, .dictionary-members dt { font-weight: normal; }
+.attributes dt code, .methods dt code, .constants dt code, .fields dt code, .dictionary-members dt code { font-weight: bold; color: rgb(0, 0, 0); font-family: monospace; }
+.attributes dt code, .fields dt code, .dictionary-members dt code { background: none repeat scroll 0% 0% rgb(255, 255, 210); }
+.attributes dt .idlAttrType code, .fields dt .idlFieldType code, .dictionary-members dt .idlMemberType code { color: rgb(0, 90, 156); background: none repeat scroll 0% 0% transparent; font-family: inherit; font-weight: normal; font-style: italic; }
+.methods dt code { background: none repeat scroll 0% 0% rgb(217, 230, 248); }
+.constants dt code { background: none repeat scroll 0% 0% rgb(221, 255, 210); }
+.attributes dd, .methods dd, .constants dd, .fields dd, .dictionary-members dd { margin-bottom: 1em; }
+table.parameters, table.exceptions { border-spacing: 0px; border-collapse: collapse; margin: 0.5em 0px; width: 100%; }
+table.parameters { border-bottom: 1px solid rgb(144, 184, 222); }
+table.exceptions { border-bottom: 1px solid rgb(222, 184, 144); }
+.parameters th, .exceptions th { color: rgb(255, 255, 255); padding: 3px 5px; text-align: left; font-family: initial; font-weight: normal; text-shadow: 1px 1px 0px rgb(102, 102, 102); }
+.parameters th { background: none repeat scroll 0% 0% rgb(144, 184, 222); }
+.exceptions th { background: none repeat scroll 0% 0% rgb(222, 184, 144); }
+.parameters td, .exceptions td { padding: 3px 10px; border-top: 1px solid rgb(221, 221, 221); vertical-align: top; }
+.parameters tr:first-child td, .exceptions tr:first-child td { border-top: medium none; }
+.parameters td.prmName, .exceptions td.excName, .exceptions td.excCodeName { width: 100px; }
+.parameters td.prmType { width: 120px; }
+table.exceptions table { border-spacing: 0px; border-collapse: collapse; width: 100%; }
+
+/* ::::: http://www.w3.org/StyleSheets/TR/W3C-WD ::::: */
+
+body { padding: 2em 1em 2em 70px; margin: 0px; font-family: sans-serif; color: black; background: none no-repeat fixed left top white; }
+:link { color: rgb(0, 0, 204); background: none repeat scroll 0% 0% transparent; }
+:visited { color: rgb(102, 0, 153); background: none repeat scroll 0% 0% transparent; }
+a:active { color: rgb(204, 0, 0); background: none repeat scroll 0% 0% transparent; }
+a:link img, a:visited img { border-style: none; }
+a img { color: white; }
+@media all {
+  a img { color: inherit; }
+}
+th, td { font-family: sans-serif; }
+h1, h2, h3, h4, h5, h6 { text-align: left; }
+h1, h2, h3 { color: rgb(0, 90, 156); background: none repeat scroll 0% 0% white; }
+h1 { font: 170% sans-serif; }
+h2 { font: 140% sans-serif; }
+h3 { font: 120% sans-serif; }
+h4 { font: bold 100% sans-serif; }
+h5 { font: italic 100% sans-serif; }
+h6 { font: small-caps 100% sans-serif; }
+.hide { display: none; }
+div.head { margin-bottom: 1em; }
+div.head h1 { margin-top: 2em; clear: both; }
+div.head table { margin-left: 2em; margin-top: 2em; }
+p.copyright { font-size: small; }
+p.copyright small { font-size: small; }
+@media screen {
+  a[href]:hover { background: none repeat scroll 0% 0% rgb(255, 255, 170); }
+}
+pre { margin-left: 2em; }
+dt, dd { margin-top: 0px; margin-bottom: 0px; }
+dt { font-weight: bold; }
+ul.toc, ol.toc { list-style: none outside none; }
+@media aural {
+  h1, h2, h3 {  }
+  .hide {  }
+  p.copyright {  }
+  dt {  }
+  pre {  }
+}
+body { background-image: url('logo-WD'); }
